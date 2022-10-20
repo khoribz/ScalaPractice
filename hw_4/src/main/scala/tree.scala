@@ -3,9 +3,7 @@ sealed trait Tree
 case class Node(value: Int, left: Tree, right: Tree) extends Tree
 
 case object RedLeaf extends Tree
-
 case object YellowLeaf extends Tree
-
 case object GreenLeaf extends Tree
 
 case class treeMethods(tree: Tree) extends Tree {
@@ -16,7 +14,7 @@ case class treeMethods(tree: Tree) extends Tree {
       case Node(value, left, RedLeaf | YellowLeaf) =>
         value + countYellowAndRedValues(left)
       case Node(_, left, right) => countYellowAndRedValues(left) + countYellowAndRedValues(right)
-      case GreenLeaf | RedLeaf | YellowLeaf => 0
+      case _ => 0
     }
   }
 
@@ -29,7 +27,7 @@ case class treeMethods(tree: Tree) extends Tree {
   }
 }
 
-object main extends App {
+object Main extends App {
   val tree = Node(30, Node(20, RedLeaf, Node(13, YellowLeaf, YellowLeaf)),
     Node(14, Node(37, RedLeaf, RedLeaf), Node(10, RedLeaf, GreenLeaf))
   )

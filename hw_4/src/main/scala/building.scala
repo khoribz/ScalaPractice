@@ -9,7 +9,8 @@ case object Attic extends Floor
 
 case class Building(address: String, floor: Floor)
 
-class BuildingFunctions {
+object Building {
+  @tailrec
   def protoFold(building: Building, acc0: Int)(f: (Int, LivingFloor) => Int): Int = {
     building.floor match {
       case Attic => acc0
