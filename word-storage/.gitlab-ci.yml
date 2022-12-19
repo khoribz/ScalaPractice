@@ -1,0 +1,24 @@
+image: sbtscala/scala-sbt:eclipse-temurin-17.0.4_1.7.1_3.2.0
+
+stages:
+  - test
+  - publish
+
+test:
+  stage:
+    test
+  script:
+    sbt coverage test coverageReport
+  artifacts:
+    reports:
+      junit:
+        - ./target/test-reports/*.xml
+
+publish:
+  stage:
+    publish
+  script:
+    sbt universal:packageBin
+  artifacts:
+    paths:
+      - ./target/universal/word-storage-*.zip
